@@ -1,6 +1,7 @@
 import { mapMongoRowToPerson } from "../../mappers";
 import { PersonMongoModel } from "../../models";
 import { PersonFilter, PersonResponse } from "../../types";
+import { buildMongoFilter } from "../../utils/buildPersonFilter";
 import IPersonRepository from "./IPersonRepository";
 
 /**
@@ -20,14 +21,7 @@ export class MongoPersonRepository implements IPersonRepository {
     * @throws {Error} If there is an issue with the database query or mapping the results.
     */
     async getPersons(filter?: PersonFilter): Promise<PersonResponse[]> {
-        const query: any = {};
-        if (filter?.country) {
-            query.country = filter.country;
-        }
-        if (filter?.name) {
-            query.name = { $regex: new RegExp(filter.name, 'i') };
-        }
-
+        const query = buildMongoFilter(filter);
         try {
             const people = await PersonMongoModel.find(query);
             return people.map((person) => mapMongoRowToPerson(person));
