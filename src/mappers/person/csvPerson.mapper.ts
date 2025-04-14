@@ -7,6 +7,11 @@ interface CsvRow {
     "Number": string;
     "Full Address": string;
 }
+/**
+ * The function takes a row as an argument, and returns a PersonResponse object.
+ * @param row - The row from the CSV file to be mapped to a PersonResponse.
+ * @return A PersonResponse object with the mapped values.
+ */
 export function mapCsvRowToPerson(row: CsvRow): PersonResponse {
     const fullAddrss = row["Full Address"] || '';
     let address = '';

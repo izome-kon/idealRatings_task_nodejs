@@ -2,6 +2,17 @@ import connectMongoDB from "../../../src/config/mongodb";
 import { PersonMongoModel } from "../../../src/models";
 
 
+/**
+ * Seeds the MongoDB database with person details.
+ *
+ * This function connects to the MongoDB database, then deletes all existing documents
+ * in the Person collection. It then inserts a set of four person documents into the
+ * collection. The function logs a message to the console to indicate whether the
+ * seeding process was successful or not. The function exits the process with a
+ * status code of 0 after completing.
+ *
+ * The function does not return any value.
+ */
 export async function seedMongoPersonDetails() {
     await connectMongoDB();
     try {
