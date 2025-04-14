@@ -1,0 +1,30 @@
+services:
+  app:
+    build: .
+    container_name: ideal_ratings_api
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    depends_on:
+      - mongo
+    command: >
+      sh -c "chmod +x ./init.sh && ./init.sh"
+    restart: always
+
+  mongo:
+    image: mongo
+    container_name: mongo_ideal_ratings
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: always
+
+volumes:
+  mongo-data:
+
+
+networks:
+  mongo_network:
+    driver: bridge
