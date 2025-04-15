@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import personRoutes from './routes/person.routes';
 import connectMongoDB from './config/mongodb';
 import dotenv from "dotenv";
+import errorHandler from './middlewares/errorHandler';
 dotenv.config();
 
 connectMongoDB();
@@ -17,5 +18,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/person', personRoutes);
+
+app.use(errorHandler);
 
 export default app;
