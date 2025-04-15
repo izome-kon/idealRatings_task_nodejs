@@ -9,11 +9,7 @@ import { Response } from 'express';
  */
 
 export const successResponse = (res: Response, data: any, message?: string) => {
-    res.status(200).json({
-        success: true,
-        data,
-        message,
-    });
+    res.status(200).json(data);
 }
 
 /**
