@@ -1,6 +1,6 @@
 import { PersonResponse } from "../../types";
 
-interface CsvRow {
+export interface CsvRow {
     "First Name": string;
     "Last Name": string;
     "Country code": string;
@@ -19,8 +19,10 @@ export function mapCsvRowToPerson(row: CsvRow): PersonResponse {
 
     if (fullAddrss.includes(',')) {
         const [addressPart, countryPart] = fullAddrss.split(',');
-        address = addressPart;
-        country = countryPart;
+        address = addressPart.trim();
+        country = countryPart.trim();
+    } else {
+        address = fullAddrss;
     }
 
     return {
